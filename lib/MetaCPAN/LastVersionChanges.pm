@@ -52,9 +52,9 @@ sub last_changes {
     $url = URI->new($url) unless ref $url;
     my $res = $scraper->scrape($url);
     my $last_changes = $res->{last_changes};
-    my $whatsnew = $last_changes->{whatsnew};
+    my $whatsnew = $last_changes->{whatsnew} || "";
     my ($version) = $whatsnew =~ m{Changes for version (.+)};
-    { version => $version, entries => $last_changes->{entries} };
+    { version => $version, entries => $last_changes->{entries} || [] };
 }
 
 1;
